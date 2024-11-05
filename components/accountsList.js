@@ -1,4 +1,7 @@
-const accounts =[
+import { useState } from "react";
+import AccountsRow from "./accountsRow";
+
+const accountsArray =[
     {
         "account_id": 1,
         "user_id": 1,
@@ -27,6 +30,22 @@ const accounts =[
 ]
 
 const AccountsList = () => {
+    const [accounts, setAccounts] = useState(accountsArray);
+
+    const addAccount = () => {
+        setAccounts([
+            ...accounts,
+            {
+                "account_id": 4,
+                "user_id": 1,
+                "name": "savings 3",
+                "balance": "1000.999",
+                "currency": "EURO",
+                "account_type": "SAVINGS",
+                "interest_rate": 3,
+            }
+        ]);
+    };
     return (
         <>
             <div className="row mb-2">
@@ -40,20 +59,24 @@ const AccountsList = () => {
                         <th>Type</th>
                         <th>Name</th>
                         <th>Balance</th>
+                        <th>Currency</th>
                     </tr>
                 </thead>
                 <tbody>
                     {accounts.map(a =>(
-                        <tr key={a.account_id}>
-                            <th>{a.account_type}</th>
-                            <th>{a.name}</th>
-                            <th>{a.balance}</th>
-                        </tr>
+                        <AccountsRow key={a.id} account={a} />
                     ))}
                 </tbody>
             </table>
+
+            <button className="btn btn-primary" onClick={addAccount}>
+                Add
+            </button>
         </>
     );
 }
 
 export default AccountsList;
+
+
+//some = () => {}; this is an arrow function 

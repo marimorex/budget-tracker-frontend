@@ -4,7 +4,7 @@ import AccountsList from "./accountsList";
 const App = () => {
     return (
         <>
-            <Banner HeaderText="Budget Tracker, keeping your money close"/>
+            <Banner HeaderText="Budget Tracker, details are important"/>
             <AccountsList/>
         </>
     );
