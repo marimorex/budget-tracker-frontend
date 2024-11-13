@@ -1,36 +1,14 @@
-import { useState } from "react";
-import AccountsRow from "./accountsRow";
+import loadingStatus from "@/helpers/loadingStatus";
+import AccountRow from "./accountRow";
+import useAccounts from "@/hooks/useAccounts";
+import LoadingIndicator from "./loadingIndicator";
 
-const accountsArray =[
-    {
-        "account_id": 1,
-        "user_id": 1,
-        "name": "current 1",
-        "balance": "100.00",
-        "currency": "EURO",
-        "account_type": "CURRENT",
-    },
-    {
-        "account_id": 2,
-        "user_id": 1,
-        "name": "savings 1",
-        "balance": "100.00",
-        "currency": "EURO",
-        "account_type": "SAVINGS",
-        "interest_rate": 3,
-    },
-    {
-        "account_id": 3,
-        "user_id": 1,
-        "name": "cash 1",
-        "balance": "100.00",
-        "currency": "EURO",
-        "account_type": "CASH",
-    },
-]
+const AccountList = () => {
+    const {accounts, setAccounts, loadingState} = useAccounts();
 
-const AccountsList = () => {
-    const [accounts, setAccounts] = useState(accountsArray);
+    if (loadingState !== loadingStatus.loaded)
+        return <LoadingIndicator loadingState={loadingState}/>
+
 
     const addAccount = () => {
         setAccounts([
@@ -64,7 +42,7 @@ const AccountsList = () => {
                 </thead>
                 <tbody>
                     {accounts.map(a =>(
-                        <AccountsRow key={a.id} account={a} />
+                        <AccountRow key={a.account_id} account={a}  />
                     ))}
                 </tbody>
             </table>
@@ -76,7 +54,7 @@ const AccountsList = () => {
     );
 }
 
-export default AccountsList;
+export default AccountList;
 
 
 //some = () => {}; this is an arrow function 
